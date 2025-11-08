@@ -1,10 +1,11 @@
 using my.bookshop as my from '../db/schema';
 using anubhav.db as db from '../db/datamodel';
 
+
 service CatalogService @(path:'/CatalogService'){
     @readonly 
     entity Books as projection on my.Books;
-    //function hello(to:String) returns String; 
+    function hello(to:String) returns String; 
 
     entity EmployeeSet as projection on db.master.employees;
 
@@ -27,4 +28,10 @@ service CatalogService @(path:'/CatalogService'){
         PARENT_KEY: redirected to POs,
         PRODUCT_GUID: redirected to ProductSet
     }
+
+    entity POWorklist as projection on db.cdsview.POWorklist;
+    entity ProductOrders as projection on db.cdsview.ProductViewSub;
+    // entity ProductAggregation as projection on db.cdsview.CProductValuesView excluding{
+    //     ProductId
+    // };
 }
